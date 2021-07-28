@@ -11,10 +11,12 @@ module.exports = {
 
 let Embedtool = new Discord.MessageEmbed()
 .setTitle("Pick the Game")
+.setColor("BLUE")
 .setDescription(`
 1️⃣ Valorant
 2️⃣ Ragnarok
 3️⃣ Minecraft
+`)
 const games = await message.channel.send(EmbedTool)
 games.react("1️⃣")
 games.react("2️⃣")
