@@ -1,5 +1,7 @@
 # Revamp BOT
-EXAMPLE DISCORD BOT
+EXAMPLE DISCORD BOT<br>
+npm yang berlebihan bisa di uninstall<br>
+npm uninstall <package><br> 
 
 Feature :<br>
 ✅ - Bot bisa mengganti limit channel dan name sesuai game yg di react<br>
