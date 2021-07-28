@@ -8,6 +8,7 @@ Feature :<br>
 Sebagai contohnya, bot yang saya buat ini sudah ada di Culverine server, bisa di test.<br>
 maksimal penggantian yaitu 2x, sesuai aturan discord yang saya tau, selebihnya, bot akan lepas alih channel tersebut<br>
 <br>
+⚠ - Pastikan bot memiliki manage channel DI CATEGORY TERTENTU, yaitu game channel
 
 Tata cara :<br>
 1️⃣ - jalankan command namanya kalo gasalah Gameembed<br>
