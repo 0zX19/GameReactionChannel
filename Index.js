@@ -6,7 +6,7 @@ const { join } = require("path");
 const snekfetch = require("snekfetch");
 const fetch = require("node-fetch");
 const { prefix } = require('./Database.json');
-const client = new Client({ disableMentions: "everyone" });
+const client = new Client();
 
 require('dotenv').config()
 
@@ -19,8 +19,39 @@ const cooldowns = new Collection();
 const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 
-  //Client Events
- 
+//GAMES CHANNEL EDITOR
+client.on('messageReactionAdd', async(reaction, user) => {
+    if(reaction.message.partial) await reaction.message.fetch();
+    if(reaction.partial) await reaction.fetch();
+    if(user.bot) return;
+    if(!reaction.message.guild) return;
+    
+    if(reaction.message.id === 'GAME_MESSAGE_ID'){
+        if(reaction.emoji.name === '1️⃣') {
+          reaction.users.remove(user)
+          await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"CHANNEL_NAME", userLimit : "GAME_LIMIT"})             
+          await reaction.message.channel.send("Channel updated 👌")
+        }
+    }
+
+    if(reaction.message.id === 'GAME_MESSAGE_ID'){
+        if(reaction.emoji.name === '2️⃣') {
+          reaction.users.remove(user)
+           await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"CHANNEL_NAME", userLimit : "GAME_LIMIT"})
+           await reaction.message.channel.send("Channel updated 👌")
+        }
+    }
+
+    if(reaction.message.id === 'GAME_MESSAGE_ID'){
+        if(reaction.emoji.name === '3️⃣') {
+          reaction.users.remove(user)
+          await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"CHANNEL_NAME", userLimit : "GAME_LIMIT"})
+          await reaction.message.channel.send("Channel updated 👌")
+        }
+    }
+})
+
+//CLIENT EVENTS 
 client.on("ready", () => {
   console.log(`✅ ${client.user.username} Summoned`);
   });
@@ -47,10 +78,8 @@ client.user.setPresence({ activity:  {
                                       type: 'WATCHING' 
         });
     }, 4000);
-});
-
- //Import all commands
- 
+}); 
+//IMPORT COMMANDS
 client.on("message", async (message) => {
 const commandFiles = readdirSync(join(__dirname, "Commands")).filter((file) => file.endsWith(".js"));
 for (const file of commandFiles) {
@@ -109,4 +138,3 @@ client.on("message", async (message) => {
 
 
 client.login(process.env.DISCORD_TOKEN_BOT)
-
