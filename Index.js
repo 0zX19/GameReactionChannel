@@ -6,7 +6,15 @@ const { join } = require("path");
 const snekfetch = require("snekfetch");
 const fetch = require("node-fetch");
 const { prefix } = require('./Database.json');
-const client = new Client();
+const client = new Client({
+    messageCacheLifetime: 60,
+    fetchAllMembers: false,
+    messageCacheMaxSize: 10,
+    cacheRoles: true,
+    cacheChannels: true,
+    disableEveryone: true,
+    partials : ["MESSAGE", "CHANNEL", "REACTION"]
+});
 
 require('dotenv').config()
 
@@ -26,26 +34,26 @@ client.on('messageReactionAdd', async(reaction, user) => {
     if(user.bot) return;
     if(!reaction.message.guild) return;
     
-    if(reaction.message.id === 'GAME_MESSAGE_ID'){
+    if(reaction.message.id === 'Message_id'){
         if(reaction.emoji.name === '1️⃣') {
           reaction.users.remove(user)
-          await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"CHANNEL_NAME", userLimit : "GAME_LIMIT"})             
+          await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"channel_name", userLimit : "5"})             
           await reaction.message.channel.send("Channel updated 👌")
         }
     }
 
-    if(reaction.message.id === 'GAME_MESSAGE_ID'){
+    if(reaction.message.id === 'Message_id'){
         if(reaction.emoji.name === '2️⃣') {
           reaction.users.remove(user)
-           await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"CHANNEL_NAME", userLimit : "GAME_LIMIT"})
+           await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"channel_name", userLimit : "5"})
            await reaction.message.channel.send("Channel updated 👌")
         }
     }
 
-    if(reaction.message.id === 'GAME_MESSAGE_ID'){
+    if(reaction.message.id === 'Message_id'){
         if(reaction.emoji.name === '3️⃣') {
           reaction.users.remove(user)
-          await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"CHANNEL_NAME", userLimit : "GAME_LIMIT"})
+          await reaction.message.guild.members.cache.get(user.id).voice.channel.edit({name :"channel_name", userLimit : "5"})
           await reaction.message.channel.send("Channel updated 👌")
         }
     }
